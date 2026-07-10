@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-export default function RegisterPage() {
+export  function RegisterPage() {
   const [formData, setFormData] = useState({
     full_name: '',
     email: '',
@@ -34,11 +34,8 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      await register({
-        full_name: formData.full_name,
-        email: formData.email,
-        password: formData.password,
-      });
+      
+      await register(formData.email, formData.password, formData.full_name);
       navigate('/reports');
     } catch (err: any) {
       setError(err.response?.data?.detail || 'Registration failed. Try again.');
