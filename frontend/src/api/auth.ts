@@ -13,13 +13,13 @@ export interface LoginPayload {
   password: string;
 }
 
+
 export const authApi = {
   register: (payload: RegisterPayload) =>
-  apiClient.post<User>("/auth/register", {
-    ...payload,
-    role: payload.role ?? "TEAM_MEMBER",   // default role if not provided
-  }).then((r) => r.data),
-
+    apiClient.post<User>("/auth/register", {
+      ...payload,
+      role: payload.role ?? "TEAM_MEMBER",   // default role if not provided
+    }).then((r) => r.data),
 
   login: (payload: LoginPayload) =>
     apiClient.post<TokenPair>("/auth/login", payload).then((r) => r.data),

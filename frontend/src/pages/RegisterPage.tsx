@@ -23,26 +23,32 @@ export  function RegisterPage() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
+  e.preventDefault();
+  setError('');
 
-    if (formData.password !== formData.confirm_password) {
-      setError("Passwords do not match");
-      return;
-    }
+  if (formData.password !== formData.confirm_password) {
+    setError("Passwords do not match");
+    return;
+  }
 
-    setLoading(true);
+  setLoading(true);
 
-    try {
-      
-      await register(formData.email, formData.password, formData.full_name);
-      navigate('/reports');
-    } catch (err: any) {
-      setError(err.response?.data?.detail || 'Registration failed. Try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    await register({
+      email: formData.email,
+      password: formData.password,
+      full_name: formData.full_name,
+      role: "TEAM_MEMBER"   // always send role
+    });
+
+    navigate('/reports');
+  } catch (err: any) {
+    setError(err.response?.data?.detail || 'Registration failed. Try again.');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
