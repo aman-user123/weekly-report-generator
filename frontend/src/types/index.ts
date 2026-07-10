@@ -43,6 +43,28 @@ export interface WeeklyReport {
   project: Project;
 }
 
+export interface WeeklyReportCreate {
+  project_id: number;
+  week_start_date: string;
+  week_end_date: string;
+  tasks_completed: string;
+  tasks_planned: string;
+  blockers?: string | null;
+  hours_worked?: number | null;
+  notes?: string | null;
+}
+
+export interface WeeklyReportUpdate {
+  project_id?: number;
+  week_start_date?: string;
+  week_end_date?: string;
+  tasks_completed?: string;
+  tasks_planned?: string;
+  blockers?: string | null;
+  hours_worked?: number | null;
+  notes?: string | null;
+}
+
 export interface WeeklyReportHistoryPage {
   items: WeeklyReport[];
   total: number;
@@ -80,6 +102,17 @@ export interface ProjectWorkload {
   project_name: string;
   report_count: number;
 }
+export interface ProjectCreate {
+  name: string;
+  description?: string | null;
+}
+
+export interface ProjectUpdate {
+  name?: string;
+  description?: string | null;
+  is_active?: boolean;
+}
+
 
 export interface ActivityItem {
   report_id: number;
